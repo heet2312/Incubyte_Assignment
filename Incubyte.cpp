@@ -53,14 +53,55 @@ void backward(int cordinate[3], char direction)
     }
 }
 
+// left rotation
+void left(char &direction)
+{
+    switch (direction)
+    {
+    case 'N':
+        direction = 'W';
+        break;
+    case 'S':
+        direction = 'E';
+        break;
+    case 'E':
+        direction = 'N';
+        break;
+    case 'W':
+        direction = 'S';
+        break;
+    }
+}
+
+// right rotation
+void right(char &direction)
+{
+    switch (direction)
+    {
+    case 'N':
+        direction = 'E';
+        break;
+    case 'S':
+        direction = 'W';
+        break;
+    case 'E':
+        direction = 'S';
+        break;
+    case 'W':
+        direction = 'N';
+        break;
+    }
+}
+
 int main()
 {
     string s;
     cout << "Enter command:";
     cin >> s;
     char direction = 'N';
+    char prev = 'N';
     int cordinate[3] = {0, 0, 0};
- 
+
     for (int i = 0; i < s.length(); i++)
     {
         if (s[i] == 'F')
