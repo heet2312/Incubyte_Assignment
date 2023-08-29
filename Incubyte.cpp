@@ -1,12 +1,56 @@
 #include <iostream>
 using namespace std;
-void forward(int cordinate[3], int distance)
+
+// for mooving forward
+void forward(int cordinate[3], char direction)
 {
-    cordinate[0] += distance;
+    switch (direction)
+    {
+    case 'N':
+        cordinate[1] += 1;
+        break;
+    case 'S':
+        cordinate[1] -= 1;
+        break;
+    case 'E':
+        cordinate[0] += 1;
+        break;
+    case 'W':
+        cordinate[0] -= 1;
+        break;
+    case 'U':
+        cordinate[2] += 1;
+        break;
+    case 'D':
+        cordinate[2] -= 1;
+        break;
+    }
 }
-void backward(int cordinate[3], int distance)
+
+// for mooving backward
+void backward(int cordinate[3], char direction)
 {
-    cordinate[0] -= distance;
+    switch (direction)
+    {
+    case 'N':
+        cordinate[1] -= 1;
+        break;
+    case 'S':
+        cordinate[1] += 1;
+        break;
+    case 'E':
+        cordinate[0] -= 1;
+        break;
+    case 'W':
+        cordinate[0] += 1;
+        break;
+    case 'U':
+        cordinate[2] -= 1;
+        break;
+    case 'D':
+        cordinate[2] += 1;
+        break;
+    }
 }
 
 int main()
@@ -14,19 +58,20 @@ int main()
     string s;
     cout << "Enter command:";
     cin >> s;
+    char direction = 'N';
     int cordinate[3] = {0, 0, 0};
-    bool flag = 0;
-    for(int i=0;i<s.length();i++)
+ 
+    for (int i = 0; i < s.length(); i++)
     {
-        if(s[i]=='F')
+        if (s[i] == 'F')
         {
-            forward(cordinate, 1);
+            forward(cordinate, direction);
         }
-        else if(s[i]=='B')
+        else if (s[i] == 'B')
         {
-            backward(cordinate, 1);
+            backward(cordinate, direction);
         }
     }
-    cout<<"Final cordinates are: "<<cordinate[0]<<" "<<cordinate[1]<<" "<<cordinate[2]<<endl;
+    cout << "Final cordinates are: " << cordinate[0] << " " << cordinate[1] << " " << cordinate[2] << endl;
     return 0;
 }
