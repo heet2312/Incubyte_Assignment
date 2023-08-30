@@ -220,7 +220,7 @@ void right(char &direction, char &prev)
 }
 
 // upward rotation
-void up(char &direction, char &prev)
+void up(char &direction, char &prev, char &prevCommand)
 {
     switch (direction)
     {
@@ -231,7 +231,7 @@ void up(char &direction, char &prev)
 
     case 'S':
         prev = 'S';
-        direction = 'D';
+        direction = 'U';
         break;
 
     case 'E':
@@ -241,7 +241,7 @@ void up(char &direction, char &prev)
 
     case 'W':
         prev = 'W';
-        direction = 'D';
+        direction = 'U';
         break;
 
     case 'U':
@@ -249,13 +249,14 @@ void up(char &direction, char &prev)
         break;
 
     case 'D':
-        direction = inverse(prev);
+        direction = prev;
         break;
     }
+    prevCommand = 'U';
 }
 
 // downward rotation
-void down(char &direction, char &prev)
+void down(char &direction, char &prev, char &prevCommand)
 {
     switch (direction)
     {
@@ -265,7 +266,7 @@ void down(char &direction, char &prev)
         break;
     case 'S':
         prev = 'S';
-        direction = 'U';
+        direction = 'D';
         break;
     case 'E':
         prev = 'E';
@@ -273,15 +274,16 @@ void down(char &direction, char &prev)
         break;
     case 'W':
         prev = 'W';
-        direction = 'U';
+        direction = 'D';
         break;
     case 'U':
-        direction = 'S';
+        direction = prev;
         break;
     case 'D':
-        direction = 'N';
+        direction = inverse(prev);
         break;
     }
+    prevCommand = 'D';
 }
 
 int main()
@@ -294,6 +296,7 @@ int main()
     // initial cordinates
     char direction = 'N';
     char prev;
+    char prevCommand;
     int cordinate[3] = {0, 0, 0};
 
     // traversing the string
@@ -317,11 +320,11 @@ int main()
         }
         else if (s[i] == 'U')
         {
-            up(direction, prev);
+            up(direction, prev, prevCommand);
         }
         else if (s[i] == 'D')
         {
-            down(direction, prev);
+            down(direction, prev, prevCommand);
         }
         else
         {
